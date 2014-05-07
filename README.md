@@ -504,6 +504,12 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
   hash = { :one => 1, :two => 2, :three => 3 }
 ```
 
+- Adopt the new hash syntax where possible.
+
+```ruby
+  hash = { one: 1, two: 2, three: 3 }
+```
+
 ## Strings
 
 - Prefer string interpolation instead of string concatenation:
