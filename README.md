@@ -632,32 +632,6 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
   %r(^/blog/2011/(.*)$)
 ```
 
-## Hashes
-
-- Use hashrocket syntax for Hash literals instead of the JSON style introduced in 1.9.
-
-```ruby
-  # bad
-  user = {
-    login: "defunkt",
-    name: "Chris Wanstrath"
-  }
-
-  # bad
-  user = {
-    login: "defunkt",
-    name: "Chris Wanstrath",
-    "followers-count" => 52390235
-  }
-
-  # good
-  user = {
-    :login => "defunkt",
-    :name => "Chris Wanstrath",
-    "followers-count" => 52390235
-  })
-```
-
 ## Above all else
 
 Follow your ![:heart:](https://github.global.ssl.fastly.net/images/icons/emoji/heart.png ":heart:")
