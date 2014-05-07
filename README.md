@@ -504,6 +504,13 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
   hash = { :one => 1, :two => 2, :three => 3 }
 ```
 
+- Don't use symbols where you have dynamic key names.
+
+```ruby
+  # bad
+  hash = { :"user_#{id}" => "fred" }
+```
+
 ## Strings
 
 - Prefer string interpolation instead of string concatenation:
