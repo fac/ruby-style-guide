@@ -510,6 +510,28 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
   hash = { 1980 => "eighties", 1990 => "nineties", 2000 => "naughties" }
 ```
 
+- When splitting a hash over multiple lines, place one key/value pair per line
+  with the closing brace on the line after the last key/value pair.
+
+- Indent the contents of multiline hashes one level deeper than the preceeding
+  code, don't line the hash up with the braces.
+
+```ruby
+  # bad
+  hash = Contact.create({first_name: "Robert",
+                         last_name: "Burns",
+                         email: "haggis@burns.net"}
+
+  # good
+  hash = Contact.create({
+    first_name: "Robert",
+    last_name:  "Burns",
+    email:      "haggis@burns.net",
+  }
+```
+
+- Add spacing to line up the hash rockets and/or values in columns if it helps
+  readability.
 
 - Don't use symbols where you have dynamic key names.
 
