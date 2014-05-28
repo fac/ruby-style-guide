@@ -494,15 +494,22 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
 
 - Use `Set` instead of `Array` when dealing with unique elements. `Set` implements a collection of unordered values with no duplicates. This is a hybrid of `Array`'s intuitive inter-operation facilities and `Hash`'s fast lookup.
 
-- Use symbols instead of strings as hash keys.
+- Adopt the new hash syntax for hashes where all the keys will always be
+  symbols, for example, when creating instances using factories in tests or in
+  options hashes passed to methods.
+- For hashes where some keys may not be symbols use the old style hash rocket
+  syntax.
+- Use symbols instead of strings as hash keys where possible.
 
 ```ruby
   # bad
   hash = { "one" => 1, "two" => 2, "three" => 3 }
 
   # good
-  hash = { :one => 1, :two => 2, :three => 3 }
+  hash = { one: 1, two: 2, three: 3 }
+  hash = { 1980 => "eighties", 1990 => "nineties", 2000 => "naughties" }
 ```
+
 
 - Don't use symbols where you have dynamic key names.
 
@@ -510,8 +517,6 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
   # bad
   hash = { :"user_#{id}" => "fred" }
 ```
-
-- Adopt the new hash syntax where possible.
 
 ```ruby
   hash = { one: 1, two: 2, three: 3 }
