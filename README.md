@@ -500,14 +500,15 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
 - For hashes where some keys may not be symbols use the old style hash rocket
   syntax.
 - Use symbols instead of strings as hash keys where possible.
+- Don't use spaces after `{` or before `}`.
 
 ```ruby
   # bad
   hash = { "one" => 1, "two" => 2, "three" => 3 }
 
   # good
-  hash = { one: 1, two: 2, three: 3 }
-  hash = { 1980 => "eighties", 1990 => "nineties", 2000 => "naughties" }
+  hash = {one: 1, two: 2, three: 3}
+  hash = {1980 => "eighties", 1990 => "nineties", 2000 => "naughties"}
 ```
 
 - When splitting a hash over multiple lines, place one key/value pair per line
