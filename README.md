@@ -17,7 +17,7 @@ for typos etc.
 
 - End each file with a blank newline.
 
-- Use spaces around operators, after commas, colons and semicolons, around `{`and before `}`.
+- Use spaces around operators, after commas, colons and semicolons. Use spaces around `{` and before `}` in blocks.
 
 ```ruby
   sum = 1 + 2
@@ -25,7 +25,7 @@ for typos etc.
   1 > 2 ? true : false; puts "Hi"
   [1, 2, 3].each { |e| puts e }
 ```
-- No spaces after `(`, `[` or before `]`, `)`.
+- No spaces after `(`, `[` or before `]`, `)`. No spaces after `{` and before `}` in hash declarations.
 
 
 ```ruby
