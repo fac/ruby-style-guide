@@ -511,6 +511,28 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
   hash = { :"user_#{id}" => "fred" }
 ```
 
+- Use `%i()` for arrays of symbols which require interpolation (ruby 2!)
+
+```ruby
+  # bad
+  [:one, :two, :three]
+
+  # good
+  %i(one two three)
+```
+
+- Use `%I()` for arrays of symbols which require interpolation (ruby 2!)
+
+```ruby
+  # bad
+  a = "two"
+  [:one, a.to_sym, :three] # => [:one, :two, :three]
+
+  # good
+  a = "two"
+  %I(one #{a} three) # => [:one, :two, :three]
+```
+
 ## Strings
 
 - Prefer string interpolation instead of string concatenation:
