@@ -531,6 +531,19 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
   )
 ```
 
+- Drop `{}` around arguments when the there is only one hash as the argument, whether parens are included or not
+
+```ruby
+  # bad
+  hash = Contact.create({first_name: "Robert", last_name: "Burns"})
+
+  # good
+  hash = Contact.create(first_name: "Robert", last_name: "Burns")
+
+  # also good
+  hash = Contact.create first_name: "Robert", last_name: "Burns"
+```
+
 - Add spacing to line up the hash rockets and/or values in columns if it helps
   readability.
 
