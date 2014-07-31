@@ -17,7 +17,7 @@ for typos etc.
 
 - End each file with a blank newline.
 
-- Use spaces around operators, after commas, colons and semicolons, around `{`and before `}`.
+- Use spaces around operators, after commas, colons and semicolons. Use spaces around `{` and before `}` in blocks.
 
 ```ruby
   sum = 1 + 2
@@ -25,7 +25,7 @@ for typos etc.
   1 > 2 ? true : false; puts "Hi"
   [1, 2, 3].each { |e| puts e }
 ```
-- No spaces after `(`, `[` or before `]`, `)`.
+- No spaces after `(`, `[` or before `]`, `)`. No spaces after `{` and before `}` in hash declarations.
 
 
 ```ruby
@@ -494,21 +494,68 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
 
 - Use `Set` instead of `Array` when dealing with unique elements. `Set` implements a collection of unordered values with no duplicates. This is a hybrid of `Array`'s intuitive inter-operation facilities and `Hash`'s fast lookup.
 
-- Use symbols instead of strings as hash keys.
+- Adopt the new hash syntax for hashes where all the keys will always be
+  symbols, for example, when creating instances using factories in tests or in
+  options hashes passed to methods.
+- For hashes where some keys may not be symbols use the old style hash rocket
+  syntax.
+- Use symbols instead of strings as hash keys where possible.
+- Don't use spaces after `{` or before `}`.
 
 ```ruby
   # bad
   hash = { "one" => 1, "two" => 2, "three" => 3 }
 
   # good
-  hash = { :one => 1, :two => 2, :three => 3 }
+  hash = {one: 1, two: 2, three: 3}
+  hash = {1980 => "eighties", 1990 => "nineties", 2000 => "naughties"}
 ```
+
+- When splitting a hash over multiple lines, place one key/value pair per line
+  with the closing brace on the line after the last key/value pair.
+
+- Indent the contents of multiline hashes one level deeper than the preceeding
+  code, don't line the hash up with the braces.
+
+```ruby
+  # bad
+  hash = Contact.create(first_name: "Robert",
+                         last_name: "Burns",
+                         email: "haggis@burns.net")
+
+  # good
+  hash = Contact.create(
+    first_name: "Robert",
+    last_name:  "Burns",
+    email:      "haggis@burns.net",
+  )
+```
+
+- Drop `{}` around arguments when the there is only one hash as the argument, whether parens are included or not
+
+```ruby
+  # bad
+  hash = Contact.create({first_name: "Robert", last_name: "Burns"})
+
+  # good
+  hash = Contact.create(first_name: "Robert", last_name: "Burns")
+
+  # also good
+  hash = Contact.create first_name: "Robert", last_name: "Burns"
+```
+
+- Add spacing to line up the hash rockets and/or values in columns if it helps
+  readability.
 
 - Don't use symbols where you have dynamic key names.
 
 ```ruby
   # bad
-  hash = { :"user_#{id}" => "fred" }
+  hash = {:"user_#{id}" => "fred"}
+```
+
+```ruby
+  hash = {one: 1, two: 2, three: 3}
 ```
 
 ## Strings
@@ -624,32 +671,6 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
 
   # good
   %r(^/blog/2011/(.*)$)
-```
-
-## Hashes
-
-- Use hashrocket syntax for Hash literals instead of the JSON style introduced in 1.9.
-
-```ruby
-  # bad
-  user = {
-    login: "defunkt",
-    name: "Chris Wanstrath"
-  }
-
-  # bad
-  user = {
-    login: "defunkt",
-    name: "Chris Wanstrath",
-    "followers-count" => 52390235
-  }
-
-  # good
-  user = {
-    :login => "defunkt",
-    :name => "Chris Wanstrath",
-    "followers-count" => 52390235
-  })
 ```
 
 ## Above all else
