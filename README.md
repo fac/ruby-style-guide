@@ -11,7 +11,7 @@ for typos etc.
 
 - Use soft-tabs with a two space indent.
 
-- Keep lines fewer than 80 characters.
+- Keep lines equal to or fewer than 115 characters. *(Width of github's diff view without wrapping.)*
 
 - Never leave trailing whitespace.
 
