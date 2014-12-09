@@ -340,7 +340,7 @@ Refactoring is even better. It's worth looking hard at any code that explicitly 
 
 - The names of predicate methods (methods that return a boolean value) should end in a question mark. (i.e. `Array#empty?`).
 
-- The names of potentially "dangerous" methods (i.e. methods that modify `self` or the arguments, `exit!`, etc.) should end with an exclamation mark. Bang methods should only exist if a non-bang method exists. ([More on this](http://dablog.rubypal.com/2007/8/15/bang-methods-or-danger-will-rubyist)).
+- Methods that are "dangerous," or modify the receiver, might be named with a trailing "!".
 
 
 
