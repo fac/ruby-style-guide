@@ -9,7 +9,19 @@ for typos etc.
 
 ## Coding Style
 
-- Use soft-tabs with a two space indent.
+- Use two **spaces** per indentation level (aka soft tabs). No hard tabs.
+
+```Ruby
+# bad - four spaces
+def some_method
+    do_something
+end
+
+# good
+def some_method
+  do_something
+end
+```
 
 - Keep lines equal to or fewer than 115 characters. *(Width of github's diff view without wrapping.)*
 
