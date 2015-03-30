@@ -506,21 +506,14 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
 
 - Use `Set` instead of `Array` when dealing with unique elements. `Set` implements a collection of unordered values with no duplicates. This is a hybrid of `Array`'s intuitive inter-operation facilities and `Hash`'s fast lookup.
 
-- Adopt the new hash syntax for hashes where all the keys will always be
-  symbols, for example, when creating instances using factories in tests or in
-  options hashes passed to methods.
-- For hashes where some keys may not be symbols use the old style hash rocket
-  syntax.
 - Use symbols instead of strings as hash keys where possible.
-- Don't use spaces after `{` or before `}`.
 
 ```ruby
   # bad
   hash = { "one" => 1, "two" => 2, "three" => 3 }
-
+  
   # good
-  hash = {one: 1, two: 2, three: 3}
-  hash = {1980 => "eighties", 1990 => "nineties", 2000 => "naughties"}
+  hash = { :one => 1, :two => 2, :three => 3 }
 ```
 
 - When splitting a hash over multiple lines, place one key/value pair per line
