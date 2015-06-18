@@ -342,6 +342,30 @@ While several Ruby books suggest the first style, the second is much more promin
 
 Refactoring is even better. It's worth looking hard at any code that explicitly checks types.
 
+- For single-line lambdas, `lambda` or `->` may be used.
+
+```ruby
+  scope :example, -> { where(:a => b) }
+
+  # Or
+
+  scope :example, lambda { where(:a => b) }
+```
+
+- For multi-line lambdas, prefer `lambda do ... end`
+
+```ruby
+  # bad
+  scope :long_example, lambda {
+    # ...
+  }
+
+  # good
+  scope :long_example, (lambda do
+    # ...
+  end)
+```
+
 ## Naming
 
 - Use `snake_case` for methods and variables.
@@ -511,7 +535,7 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
 ```ruby
   # bad
   hash = { "one" => 1, "two" => 2, "three" => 3 }
-  
+
   # good
   hash = { :one => 1, :two => 2, :three => 3 }
 ```
