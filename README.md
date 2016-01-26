@@ -93,6 +93,25 @@ end
   end
 ```
 
+- Last line of a multiline array or hash should end with a trailing comma. It keeps diffs much smaller when adding or deleting lines in future.
+
+```ruby
+  [
+    "one",
+    "two",
+  ]
+```
+
+- Last element of an array or hash on a single line should omit the trailing comma however.
+
+```ruby
+  # Bad
+  ["one", 2,]
+  
+  # Good
+  ["one", 2]
+```
+
 ## Documentation
 
 Use [TomDoc](http://tomdoc.org) to the best of your ability. It's pretty sweet:
