@@ -453,7 +453,7 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
   end
 ```
 
-- Avoid explicit use of instance variable
+- Avoid explicit use of instance variables
 
 ```ruby
   # bad
