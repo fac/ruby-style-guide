@@ -481,15 +481,26 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
   # bad
   begin
     # an exception occurs here
-  rescue
-    # exception handling
-  end
-
-  # still bad
-  begin
-    # an exception occurs here
   rescue Exception
     # exception handling
+  end
+```
+
+* Avoid using bare `rescue`, always specify what you are rescuing
+
+```
+  # bad - and only rescues StandardError, not Exception
+  begin
+    # an exception occurs here
+  rescue => ex
+    # exception handling
+  end
+  
+  # good
+  begin
+    # an exception occurs here
+  rescue StandardError => ex
+    # error handling here
   end
 ```
 
