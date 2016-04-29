@@ -463,7 +463,7 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
     end
   end
   
-  def bar
+  def foo?
     @foo == "Foo"
   end
   
@@ -475,18 +475,18 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
       @foo = foo
     end
     
-    def bar
+    def foo?
       foo == "Foo"
     end
   end
   
-  # better
+  # better (if `foo` doesn't need to be public)
   class SomeClass
     def initialize(foo)
       @foo = foo
     end
     
-    def bar
+    def foo?
       foo == "Foo"
     end
     
