@@ -454,6 +454,101 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
   end
 ```
 
+- Avoid explicit use of instance variables
+
+```ruby
+  # bad
+  class SomeClass
+    def initialize(foo)
+      @foo = foo
+    end
+  end
+  
+  def foo?
+    @foo == "Foo"
+  end
+  
+  # good
+  class SomeClass
+    attr_reader :foo
+    
+    def initialize(foo)
+      @foo = foo
+    end
+    
+    def foo?
+      foo == "Foo"
+    end
+  end
+  
+  # better (if `foo` doesn't need to be public)
+  class SomeClass
+    def initialize(foo)
+      @foo = foo
+    end
+    
+    def foo?
+      foo == "Foo"
+    end
+    
+    private
+    
+    attr_reader :foo
+    
+  end
+```
+
+- Avoid complex logic in the initialiser
+
+```ruby
+  # bad
+  class SomeClass
+    def initialize(foo)
+      @foo = foo
+      @bar = some_method(foo)
+    end
+  end
+  
+  # good
+  class SomeClass
+    def initialize(foo)
+      @foo = foo
+    end
+    
+    def bar
+      @bar ||= some_method(foo)
+    end
+  end
+  
+  # good (using a class method)
+  class SomeClass
+    attr_reader :foo
+    
+    def self.from_id(id)
+      new(Foo.find(id))
+    end
+    
+    def initialize(foo)
+      @foo = foo
+    end
+  end
+  
+  # good (using an instance method)
+  class SomeClass
+    def initialize(foo_id)
+      @foo_id = foo_id
+    end
+     
+    def foo
+      @foo ||= Foo.find(foo_id)
+    end
+    
+    private
+    
+    attr_reader :foo_id
+  end
+```
+
 ## Exceptions
 
 - Don't use exceptions for flow of control.
