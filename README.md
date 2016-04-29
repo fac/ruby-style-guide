@@ -518,6 +518,34 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
       @bar ||= some_method(foo)
     end
   end
+  
+  # good (using a class method)
+  class SomeClass
+    attr_reader :other_class
+    
+    def self.from_id(id)
+      new(OtherClass.find(id))
+    end
+    
+    def initialize(other_class)
+      @other_class = other_class
+    end
+  end
+  
+  # good (using an instance method)
+  class SomeClass
+    def initialize(other_class_id)
+      @other_class_id = other_class_id
+    end
+     
+    def other_class
+      OtherClass.find(other_class_id)
+    end
+    
+    private
+    
+    attr_reader :other_class_id
+  end
 ```
 
 ## Exceptions
