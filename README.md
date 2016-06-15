@@ -107,7 +107,7 @@ end
 ```ruby
   # Bad
   ["one", 2,]
-  
+
   # Good
   ["one", 2]
 ```
@@ -361,6 +361,39 @@ While several Ruby books suggest the first style, the second is much more promin
 
 Refactoring is even better. It's worth looking hard at any code that explicitly checks types.
 
+- Avoid `::` when nesting modules (at least in the application)
+
+```ruby
+  # not good
+  module Foo; end
+  module Foo::Bar; end
+  module Foo::Bar::Baz
+    def self.n
+      puts Module.nesting.inspect # => [Foo::Bar::Baz]
+    end
+  end
+
+  # good
+
+  module Foo; end
+
+  module Foo
+    module Bar; end
+  end
+
+  module Foo
+    module Bar
+      module Baz
+        def self.n
+          puts Module.nesting.inspect # => [Foo::Bar::Baz, Foo::Bar, Foo]
+        end
+      end
+    end
+  end
+```
+
+This can prevent complications when it comes to constant lookup.
+
 ## Naming
 
 - Use `snake_case` for methods and variables.
@@ -482,38 +515,38 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
       @foo = foo
     end
   end
-  
+
   def foo?
     @foo == "Foo"
   end
-  
+
   # good
   class SomeClass
     attr_reader :foo
-    
+
     def initialize(foo)
       @foo = foo
     end
-    
+
     def foo?
       foo == "Foo"
     end
   end
-  
+
   # better (if `foo` doesn't need to be public)
   class SomeClass
     def initialize(foo)
       @foo = foo
     end
-    
+
     def foo?
       foo == "Foo"
     end
-    
+
     private
-    
+
     attr_reader :foo
-    
+
   end
 ```
 
@@ -527,43 +560,43 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
       @bar = some_method(foo)
     end
   end
-  
+
   # good
   class SomeClass
     def initialize(foo)
       @foo = foo
     end
-    
+
     def bar
       @bar ||= some_method(foo)
     end
   end
-  
+
   # good (using a class method)
   class SomeClass
     attr_reader :foo
-    
+
     def self.from_id(id)
       new(Foo.find(id))
     end
-    
+
     def initialize(foo)
       @foo = foo
     end
   end
-  
+
   # good (using an instance method)
   class SomeClass
     def initialize(foo_id)
       @foo_id = foo_id
     end
-     
+
     def foo
       @foo ||= Foo.find(foo_id)
     end
-    
+
     private
-    
+
     attr_reader :foo_id
   end
 ```
@@ -609,7 +642,7 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
   rescue => ex
     # exception handling
   end
-  
+
   # good
   begin
     # an exception occurs here
@@ -637,7 +670,7 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
 ```ruby
   # bad
   hash = { "one" => 1, "two" => 2, "three" => 3 }
-  
+
   # good
   hash = { :one => 1, :two => 2, :three => 3 }
 ```
