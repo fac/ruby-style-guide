@@ -347,16 +347,36 @@ While several Ruby books suggest the first style, the second is much more promin
 
 - If the first argument to a method begins with an open parenthesis, always use parentheses in the method invocation. For example, write`f((3 + 2) + 1)`.
 
-- Use `_` for unused block parameters.
+- Prefix with `_` unused block parameters and local variables. It's
+  also acceptable to use just `_` (although it's a bit less
+  descriptive). This convention is recognized by the Ruby interpreter
+  and tools like RuboCop and will suppress their unused variable warnings.
 
-```ruby
-  # bad
-  result = hash.map { |k, v| v + 1 }
+    ```ruby
+    # bad
+    result = hash.map { |k, v| v + 1 }
 
-  # good
-  result = hash.map { |_, v| v + 1 }
-```
+    def something(x)
+      unused_var, used_var = something_else(x)
+      # ...
+    end
 
+    # good
+    result = hash.map { |_k, v| v + 1 }
+
+    def something(x)
+      _unused_var, used_var = something_else(x)
+      # ...
+    end
+
+    # good
+    result = hash.map { |_, v| v + 1 }
+
+    def something(x)
+      _, used_var = something_else(x)
+      # ...
+    end
+    ```
 - Don't use the `===` (threequals) operator to check types. `===` is mostly an implementation detail to support Ruby features like `case`, and it's not commutative. For example, `String === "hi"` is true and `"hi" === String` is false. Instead, use `is_a?` or `kind_of?` if you must.
 
 Refactoring is even better. It's worth looking hard at any code that explicitly checks types.
