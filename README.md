@@ -642,32 +642,64 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
   end
 ```
 
-- Avoid rescuing the `Exception` class.
+- Don't use bare rescues or rescue the `Exception` class.
 
 ```ruby
   # bad
   begin
     # an exception occurs here
-  rescue Exception
+  rescue Exception => e
     # exception handling
   end
-```
 
-* Avoid using bare `rescue`, always specify what you are rescuing
-
-```
-  # bad - and only rescues StandardError, not Exception
+  # bad
   begin
     # an exception occurs here
-  rescue => ex
+  rescue => e
     # exception handling
   end
 
   # good
   begin
     # an exception occurs here
-  rescue StandardError => ex
+  rescue StandardError => e
     # error handling here
+  end
+```
+
+- Use the letter `e` for your short rescue variable.
+
+```ruby
+  # bad
+  begin
+    # an exception occurs here
+  rescue StandardError => ex
+    # exception handling
+  end
+
+  # good
+  begin
+    # an exception occurs here
+  rescue StandardError => e
+    # error handling here
+  end
+```
+
+- Skip the rescue variable if you aren't going to use it.
+
+```ruby
+  # bad
+  begin
+    # an exception occurs here
+  rescue StandardError => e
+    Rails.logger.error("A problem happened!")
+  end
+
+  # good
+  begin
+    # an exception occurs here
+  rescue StandardError
+    Rails.logger.error("A problem happened!")
   end
 ```
 
