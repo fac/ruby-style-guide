@@ -808,6 +808,17 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
   end
 ```
 
+- Add the `# frozen_string_literal: true` to the top of all files. This implicitly freezes all the string literals created in that file, which puts less pressure on garbage collection.
+
+```ruby
+# frozen_string_literal: true
+class Foo
+  def initialize
+    string = "I'm frozen!"
+  end
+end
+```
+
 ## Regular Expressions
 
 - Avoid using `$1-9` as it can be hard to track what they contain. Named groups can be used instead.
