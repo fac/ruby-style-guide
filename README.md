@@ -133,6 +133,21 @@ Use [TomDoc](http://tomdoc.org) to the best of your ability. It's pretty sweet:
   end
 ```
 
+To check and generate documentation install Yard with TomDoc Plugin
+
+```bash
+gem install yard yard-tomdoc
+```
+
+Run your isolated file through the documentation parser
+
+```bash
+yard doc --plugin tomdoc $FILENAME
+open dev/index.html
+```
+
+_You do not need to commit the generated `./doc` or `.yardoc` files._
+
 ## Syntax
 
 - Use `def` with parentheses when there are arguments. Omit the parentheses when the method doesn't accept any arguments.
