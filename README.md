@@ -76,7 +76,7 @@ end
   end
 ```
 
-- Use empty lines between `def`s and to break up a method into logical paragraphs.
+- Use empty lines between method (`def`) blocks, and within methods to break up method code into logical paragraphs.
 
 
 ```ruby
