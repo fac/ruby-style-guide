@@ -143,7 +143,7 @@ Run your isolated file through the documentation parser
 
 ```bash
 yard doc --plugin tomdoc $FILENAME
-open dev/index.html
+open doc/index.html
 ```
 
 _You do not need to commit the generated `./doc` or `.yardoc` files._
