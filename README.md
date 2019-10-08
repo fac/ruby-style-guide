@@ -720,7 +720,7 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
 
 ## Collections
 
-- Prefer `%w` to the literal array syntax when you need an array ofstrings.
+- Prefer `%w` to the literal array syntax when you need an array of strings.
 
 ```ruby
   # bad
