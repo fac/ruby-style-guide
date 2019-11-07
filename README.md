@@ -782,11 +782,11 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
 
 ```ruby
   # bad
-  hash = { :"user_#{id}" => "fred" }
+  hash = {:"user_#{id}" => "fred"}
 ```
 
 ```ruby
-  hash = { one: 1, two: 2, three: 3 }
+  hash = {one: 1, two: 2, three: 3}
 ```
 
 ## Strings
