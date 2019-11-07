@@ -732,7 +732,7 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
 
 - Use `Set` instead of `Array` when dealing with unique elements. `Set` implements a collection of unordered values with no duplicates. This is a hybrid of `Array`'s intuitive inter-operation facilities and `Hash`'s fast lookup.
 
-- Use symbols instead of strings as hash keys where possible, and use the Ruby 1.9 hash syntax rather than hash rockets
+- Use symbols instead of strings as hash keys where possible, and use the Ruby 1.9 hash syntax rather than hash rockets.
 
 ```ruby
   # bad
@@ -783,10 +783,6 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
 ```ruby
   # bad
   hash = {:"user_#{id}" => "fred"}
-```
-
-```ruby
-  hash = {one: 1, two: 2, three: 3}
 ```
 
 ## Strings
