@@ -913,4 +913,4 @@ end
 
 ## Above all else
 
-Follow your ![:heart:](https://github.global.ssl.fastly.net/images/icons/emoji/heart.png ":heart:")
+Follow your :heart:
