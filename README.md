@@ -51,6 +51,14 @@ end
   !array.include?(element)
 ```
 
+- Use spaces inside `<%` ... `%>`.
+
+```erb
+  <% if condition %>
+  <% else %>
+  <% end %>
+```
+
 - Indent `when` as deep as the corresponding `end`.
 
 ```ruby
