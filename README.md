@@ -223,7 +223,79 @@ _You do not need to commit the generated `./doc` or `.yardoc` files._
   end
 ```
 
-- The `and` and `or` keywords are banned. It's just not worth it. Always use `&&` and `||` instead.
+- Do not use `and` and `or` in boolean context - `and` and `or` are control flow operators and should be used as such. They have very low precedence, and can be used as a short form of specifying flow sequences like "evaluate expression 1, and only if it is not successful (returned `nil`), evaluate expression 2". This is especially useful for raising errors or early return without breaking the reading flow.
+
+```ruby
+# good: and/or for control flow
+x = extract_arguments or raise ArgumentError, "Not enough arguments!"
+user.suspended? and return :denied
+
+# bad
+# and/or in conditions (their precedence is low, might produce unexpected result)
+if got_needed_arguments and arguments_valid
+  # ...body omitted
+end
+# in logical expression calculation
+ok = got_needed_arguments and arguments_valid
+
+# good
+# &&/|| in conditions
+if got_needed_arguments && arguments_valid
+  # ...body omitted
+end
+# in logical expression calculation
+ok = got_needed_arguments && arguments_valid
+
+# bad
+# &&/|| for control flow (can lead to very surprising results)
+x = extract_arguments || raise(ArgumentError, "Not enough arguments!")
+```
+
+Avoid several control flow operators in one expression, as that quickly
+becomes confusing:
+
+```ruby
+# bad
+# Did author mean conditional return because `#log` could result in `nil`?
+# ...or was it just to have a smart one-liner?
+x = extract_arguments and log("extracted") and return
+
+# good
+# If the intention was conditional return
+x = extract_arguments
+if x
+  return if log("extracted")
+end
+# If the intention was just "log, then return"
+x = extract_arguments
+if x
+  log("extracted")
+  return
+end
+```
+
+NOTE: Whether organizing control flow with `and` and `or` is a good idea has been a controversial topic in the community for a long time. But if you do, prefer these operators over `&&`/`||`. As the different operators are meant to have different semantics that makes it easier to reason whether you're dealing with a logical expression (that will get reduced to a boolean value) or with flow of control.
+
+Why is using `and` and `or` as logical operators a bad idea?
+
+Simply put - because they add some cognitive overhead, as they don't behave like similarly named logical operators in other languages.
+
+First of all, `and` and `or` operators have lower precedence than the `=` operator, whereas the `&&` and `||` operators have higher precedence than the `=` operator, based on order of operations.
+
+```ruby
+foo = true and false # results in foo being equal to true. Equivalent to (foo = true) and false
+bar = false or true  # results in bar being equal to false. Equivalent to (bar = false) or true
+```
+
+Also `&&` has higher precedence than `||`, where as `and` and `or` have the same one. Funny enough, even though `and` and `or`
+were inspired by Perl, they don't have different precedence in Perl.
+
+```ruby
+true or true and false # => false (it's effectively (true or true) and false)
+true || true && false # => true (it's effectively true || (true && false)
+false or true and false # => false (it's effectively (false or true) and false)
+false || true && false # => false (it's effectively false || (true && false))
+```
 
 - Avoid multi-line `?:` (the ternary operator), use `if/unless` instead.
 
