@@ -43,6 +43,7 @@ end
 ```ruby
   some(arg).other
   [1, 2, 3].length
+  some_hash = {one: 1, two: 2, three: 3}
 ```
 
 - No spaces after `!`.
@@ -744,10 +745,10 @@ As you can see all the classes in a class hierarchy actually share oneclass vari
 
 ```ruby
   # bad
-  hash = { "one" => 1, "two" => 2, "three" => 3 }
+  hash = {"one" => 1, "two" => 2, "three" => 3}
 
   # good
-  hash = { one: 1, two: 2, three: 3 }
+  hash = {one: 1, two: 2, three: 3}
 ```
 
 - When splitting a hash over multiple lines, place one key/value pair per line
